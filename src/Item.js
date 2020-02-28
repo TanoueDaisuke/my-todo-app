@@ -54,6 +54,7 @@ export default function Item({ id, isDone, number, content, deleteTodo, toggleIs
           variant="contained" 
           color={isDone ? "secondary" : "default"} 
           edge="end" 
+          style={{display: isEdit ? "none" : "block", fontSize: 11}}
           onClick={() => toggleIsDone(id)}
         >
           {buttonText}
