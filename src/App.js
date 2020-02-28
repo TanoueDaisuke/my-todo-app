@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import reset from "styled-reset";
 
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+
 import Form from './Form'
 import List from './List'
-
 
 
 // この中にcssを書いていく。
@@ -23,11 +25,11 @@ const AppWrapper = styled.div`
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  /* other styles */
 `
 
 export function App() {
   const [todos, setTodos] = useState([])
+  const [checked, setChecked] = React.useState(false)
 
   const addTodo = (tmpTodo, setTmpTodo) => {
     const newTodoItem = {
@@ -39,15 +41,12 @@ export function App() {
     setTmpTodo('')
   }
 
-
-
   // 特定のtodoを除いた新しい配列todosを作成する
   const deleteTodo = id => {
     const newTodos = todos.filter((todo) => {
       // 以下の条件に当てはまるもののみの配列を新たに作成
       return id !== todo.id
     })
-
     setTodos(newTodos)          
   }
 
@@ -58,7 +57,6 @@ export function App() {
       } 
       return todo
     })
-
     setTodos(newTodos)
   }
 
@@ -77,6 +75,34 @@ export function App() {
     setTodos(updateNewTodos)
   }
 
+  const showOnlyDoneCheckBox = () => {
+    if (todos.length === 0) {
+      return;
+    } else {
+      return (
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={checked}
+              onChange={() => setChecked(!checked)}
+              color="primary"
+            />
+          }
+          label="未完了のみ表示"
+        />
+      )
+    }
+  }
+
+  const showTodos = () => {
+    if (checked) {
+      const notDoneTodos = todos.map(todo => todo.isDone ? null : todo) // 完了のものは非表示
+      return notDoneTodos.filter(todo => todo) //undefined, nullを除く
+    } else {
+      return todos
+    }
+  }
+
   
   return (
     // 定義したAppWrapperをここで使う。
@@ -85,7 +111,13 @@ export function App() {
       <AppWrapper>
         <h1>My Todo List</h1>
         <Form addTodo={addTodo} />
-        <List todos={todos} deleteTodo={deleteTodo} toggleIsDone={toggleIsDone} updateTodo={updateTodo} />
+        {showOnlyDoneCheckBox()}
+        <List 
+          todos={showTodos()} 
+          deleteTodo={deleteTodo} 
+          toggleIsDone={toggleIsDone} 
+          updateTodo={updateTodo} 
+        />
       </AppWrapper>
     </>
   )

@@ -33,12 +33,7 @@ export default function List({todos, deleteTodo, toggleIsDone, updateTodo}) {
 
   return (
     <>
-      {/* {Items.length > 0 && <Divider style={{ height: "5px", width: "60%", backgroundColor: "blue", margin: "10px auto 20px" }} />} */}
-      {/* ↑いらない説 */}
-      
       <ItemWrapper>
-        {/* つまりItemsは以下のような構造のはず。しかしエラーになる。配列にするなってエラー */}
-        {/* {<Items id={1} content={"hogehgoe"} />, <Items id={1} content={"hogehgoe"} />} */}
         {Items}
       </ItemWrapper>
     </>
