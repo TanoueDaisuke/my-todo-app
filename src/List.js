@@ -4,10 +4,8 @@ import styled from 'styled-components'
 import Item from './Item'
 
 
-export default function List({todos, deleteTodo, toggleIsDone}) {
+export default function List({todos, deleteTodo, toggleIsDone, updateTodo}) {
   // mapの第二引数はインデックスを受け取ることができる
-  console.log(todos);
-  
   const Items = todos.map((todo, i) => (
     <Item
       // keyをつけないとエラーに近い警告メッセージが出る
@@ -19,6 +17,7 @@ export default function List({todos, deleteTodo, toggleIsDone}) {
       content={todo.content}
       deleteTodo={deleteTodo}
       toggleIsDone={toggleIsDone}
+      updateTodo={updateTodo}
     />
   )) 
 

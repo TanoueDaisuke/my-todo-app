@@ -62,6 +62,21 @@ export function App() {
     setTodos(newTodos)
   }
 
+  const updateTodo = (id, value) => {
+    const updateTodo = {
+      id: id,
+      content: value
+    }
+    const updateNewTodos = todos.map(todo => {
+      if (todo.id === id) {
+        return updateTodo
+      } else {
+        return todo
+      }
+    })
+    setTodos(updateNewTodos)
+  }
+
   
   return (
     // 定義したAppWrapperをここで使う。
@@ -70,7 +85,7 @@ export function App() {
       <AppWrapper>
         <h1>My Todo List</h1>
         <Form addTodo={addTodo} />
-        <List todos={todos} deleteTodo={deleteTodo} toggleIsDone={toggleIsDone} />
+        <List todos={todos} deleteTodo={deleteTodo} toggleIsDone={toggleIsDone} updateTodo={updateTodo} />
       </AppWrapper>
     </>
   )

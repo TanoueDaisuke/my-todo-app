@@ -22,20 +22,23 @@ export default function Form(props) {
     <>
       <form>
         <TextField 
-        type="text" 
-        name="desc"
-        onChange={e => setTmpTodo(e.target.value)}
-        value={tmpTodo}
-        label="タイトル ※必須"
-        style={{marginRight: "10px"}}
+          type="text" 
+          name="desc"
+          onChange={e => setTmpTodo(e.target.value)}
+          value={tmpTodo}
+          label="タイトル ※必須"
+          style={{marginRight: "10px"}}
         />
 
         <Button 
-        type="submit" 
-        variant="contained" 
-        color="primary" 
-        style={{verticalAlign: "bottom"}}
-        onClick={(e) => addTodo(e)}>追加</Button>
+          type="submit" 
+          variant="contained" 
+          color="primary" 
+          style={{verticalAlign: "bottom"}}
+          onClick={(e) => addTodo(e)}
+        >
+          追加
+        </Button>
 
       </form>
     </>
